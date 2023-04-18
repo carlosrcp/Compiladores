@@ -56,24 +56,24 @@ class RPNStacker:
         # leitura dos tokens
         while(self.inputs[0].tokenType!=TokenType.EOF):             
             if self.inputs[0].tokenType == TokenType.NUM:
-                self.stack.append(Token(TokenType.NUM, self.inputs.pop(0).lexeme))
+                self.stack.append(self.inputs.pop(0).lexeme)
             elif len(self.stack) >= 2:
-                    op2 = float(self.stack.pop().lexeme)                
-                    op1 = float(self.stack.pop().lexeme)
+                    op2 = float(self.stack.pop())                
+                    op1 = float(self.stack.pop())
                     operator = self.inputs.pop(0).tokenType
 
                     if operator == TokenType.PLUS:
-                        self.stack.append(Token(TokenType.NUM, op1+op2))
+                        self.stack.append(op1+op2)
                     elif operator == TokenType.MINUS:
-                        self.stack.append(Token(TokenType.NUM, op1-op2))
+                        self.stack.append(op1-op2)
                     elif operator == TokenType.STAR:
-                        self.stack.append(Token(TokenType.NUM, op1*op2))
+                        self.stack.append(op1*op2)
                     elif operator == TokenType.SLASH:
-                        self.stack.append(Token(TokenType.NUM, op1/op2))
+                        self.stack.append(op1/op2)
             else:
                 return print("Error: operacao impossivel")
         
-        print(f'Saida: {self.stack[0].lexeme}')
+        print(f'Saida: {self.stack[0]}')
 
 
 comp = RPNStacker()
